@@ -14,10 +14,10 @@ async function data(){
     let data = await collection.find({})
    return data
 }
-app.get('/',(req,res)=>{
-  res.send("hello")
-})
-app.get('/data',  async (req,res)=>{
+// app.get('/',(req,res)=>{
+//   res.send("hello")
+// })
+app.get('/',  async (req,res)=>{
   await data().then( async (a)=>{
     console.log( await a.toArray())
     res.send(await a.toArray())
