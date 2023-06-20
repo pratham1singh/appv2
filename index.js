@@ -6,16 +6,17 @@ var app= express()
 
 const port = process.env.PORT ||3000
 
-app.use(express.json())
-
-app.get('/', async (req,res)=>{
+async function data(){
     let result = await client.connect()
-  let db=result.db('login')
-  let collection= db.collection('users')
-  let data = await collection.find({})
-  data.toArray().then((a)=>{
+    let db=result.db('login')
+    let collection= db.collection('users')
+    let data = await collection.find({})
+   return data
+}
+app.get('/', async (req,res)=>{
+ (await data()).toArray().then((a)=>{
     res.send(a)
-  })
+ })
 })
 
 app.listen(port)
