@@ -15,7 +15,7 @@ async function data(){
    return data
 }
 app.get('/',(req,res)=>{
-  req.send("hello")
+  res.send("hello")
 })
 app.get('/data',  async (req,res)=>{
   await data().then( async (a)=>{
