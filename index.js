@@ -6,17 +6,25 @@ var app= express()
 
 const port = process.env.PORT ||3000
 
+
 async function data(){
     let result = await client.connect()
-    let db=result.db('login')
-    let collection= db.collection('users')
+    let db= await result.db('login')
+    let collection= await db.collection('users')
     let data = await collection.find({})
    return data
 }
-app.get('/', async (req,res)=>{
- (await data()).toArray().then((a)=>{
-    res.send(a)
- })
+app.get('/',(req,res)=>{
+  req.send()
 })
+app.get('/data',  async (req,res)=>{
+  await data().then( async (a)=>{
+    console.log( await a.toArray())
+    res.send(await a.toArray())
+  })
+ 
+})
+
+
 
 app.listen(port)
