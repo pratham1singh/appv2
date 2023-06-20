@@ -19,8 +19,8 @@ async function data(){
 // })
 app.get('/',  async (req,res)=>{
   await data().then( async (a)=>{
-    console.log( await a.toArray())
-    res.send(await a.toArray())
+    let arr=await a.toArray()
+    res.send(arr)
   })
  
 })
